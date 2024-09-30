@@ -1,0 +1,4 @@
+<svg height="22" width="22" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="m 10,1.9999999 v 5.5 l 1,1 1,-1 v -5.5 z M 2,10 v 2 h 5.5 l 1,-1 -1,-1 z m 12.5,0 -1,1 1,1 H 20 v -2 z m -3.5,3.5 -1,1 V 20 h 2 v -5.5 z" stroke="#ffffff" stroke-linejoin="round" stroke-width="2"/>
+  <path d="m 10,1.9999999 v 5.5 l 1,1 1,-1 v -5.5 z M 2,10 v 2 h 5.5 l 1,-1 -1,-1 z m 12.5,0 -1,1 1,1 H 20 v -2 z m -3.5,3.5 -1,1 V 20 h 2 v -5.5 z" fill="#e00000" fill-rule="evenodd"/>
+</svg>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>OpenStreetMap X-RAY &mdash; About/Help</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="../style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <div><h1>OSM X-RAY &mdash; About/Help</h1></div>
+    </header>
+    <div class="about">
+        <p>This map shows the all tagged objects in the <a
+        href="https://www.openstreetmap.org/">OpenStreetMap</a> database. Zoom
+        in to level 14 or above to get an interactive map.</p>
+        <h2>Interactive Map</h2>
+        <p>Hovering over objects will show the objects with their tags in a box
+        on the right.</p>
+        <p>Click on the map to lock the selected object(s). The list of
+        selected objects will not change any more when the mouse moves over
+        other objects. Use the <tt>Esc</tt> key to unlock or click on the
+        map again.</p>
+        <p>It is possible that there are several objects under the mouse
+        pointer. In that case all objects are highlighted in yellow on the map
+        and they will all show up in the box on the right. One of the objects
+        is additionally highlighted in red and gets a red border in the box on
+        the right. Use the PgUp/PgDown keys or hold down the Shift key and use
+        the scroll wheel of the mouse to cycle through the red main
+        selection.</p>
+        <p>If you have locked the selection, you can also click on the circled
+        numbers of a selected object in the box on the right to make it the
+        main selection.</p>
+        <h2>Selected Objects</h2>
+        <p>On the right you can see the selected object(s). Click on an object
+        ID to open the objects page on www.openstreetmap.org.</p>
+        <p>Click on the zoom button ⛶ to center and zoom the map to that object.
+        This will not work for larger objects, because on lower zoom levels the
+        selection is not shown.</p>
+        <p>For each object all tags are shown. Click on a tag to get a little
+        pop-up menu. Available options are to use the key/tag in the filter,
+        or link to the <a href="https://taginfo.openstreetmap.org/">taginfo</a>
+        and OSM wiki pages for this key/tag, respectively. For some types
+        of tags (like <tt>website</tt> and <tt>wikidata</tt>) a link to a
+        suitable web site is also shown.</p>
+        <h2>Direction of Ways</h2>
+        <p>On zoom levels 17 and up, selected ways will show the direction
+        the way is going with little arrows.</p>
+        <h2>Tag Filters</h2>
+        <p>The tag filter is only available in zoom level 14 and above.
+        It allows filtering for keys or key/value pairs. Only objects matching
+        the filter are shown.</p>
+        <h2>Location Tool</h2>
+        <img src="location-tool.png" alt="" width="500" style="border: 1px solid #a0a0a0; border-radius: 8px;"/>
+        <p>At the bottom of the map is the Location Tool. It shows the
+        coordinates of the mouse cursor, or alternatively the current map
+        extent or the coordinates of the map center. Coordinates can be shown
+        in lat/lon degrees or in Web Mercator units. The menu allows you to
+        open the current location in the iD or JOSM editors or on the
+        www.openstreetmap.org website.</p>
+        <h2>Source</h2>
+        <p>This map and the service behind it was created by <a
+        href="https://www.jochentopf.com/">Jochen Topf</a>. It is based on
+        <a href="https://www.postgresql.org/">PostgreSQL</a>/<a href="https://postgis.net/">PostGIS</a>
+        as database and uses <a href="https://osm2pgsql.org/">osm2pgsql</a>
+        to import the OSM data. The tiles are generated using
+        <a href="https://github.com/CrunchyData/pg_tileserv">pg_tileserv</a>.</p>
+        <p>The source code
+        is <a href="https://github.com/joto/osm-xray">available on Github</a>.
+        Please open an issue there if you have any suggestions or want to
+        report a problem.</p>
+    </div>
+  </body>
+</html>

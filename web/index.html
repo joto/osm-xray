@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>OpenStreetMap X-RAY</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src="maplibre-gl.js"></script>
+    <script src="map.js"></script>
+    <link href="maplibre-gl.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <div class="header-element"><h1>OSM X-RAY</h1></div>
+      <div class="header-element settings-element enabled">
+        Background map
+        <form id="settings-background" autocomplete="off">
+          <select name="background" id="setting-background">
+            <option value="none">(None)</option>
+            <option value="osm" selected>OSM</option>
+            <option value="osmde">OSM DE</option>
+          </select>
+          <select name="background-opacity" id="setting-opacity">
+            <option value="25">25%</option>
+            <option value="50" selected>50%</option>
+            <option value="75">75%</option>
+            <option value="100">100%</option>
+          </select>
+        </form>
+      </div>
+      <div class="header-element settings-element enabled">
+        Overlay
+        <form id="settings-overlay" autocomplete="off">
+          <input type="checkbox" id="setting-layerBoundaries" checked/>
+          <label for="setting-layerBoundaries">Boundaries</label>
+        </form>
+      </div>
+      <div class="header-element settings-element enabled">
+        Object types filter
+        <form id="settings-objecttype" autocomplete="off">
+          <fieldset>
+            <input type="checkbox" id="setting-typeNodes" checked/>
+            <label for="setting-typeNodes">Nodes</label>
+            <input type="checkbox" id="setting-typeWays" checked/>
+            <label for="setting-typeWays">Ways</label>
+            <input type="checkbox" id="setting-typeRelations" checked/>
+            <label for="setting-typeRelations" id="setting-typeRelations-label">Relations</label>
+          </fieldset>
+        </form>
+      </div>
+      <div id="filter" class="header-element settings-element enabled">
+        Tag filter
+        <form id="settings-keyvalue" autocomplete="off">
+          <fieldset id="settings-keyvalue-set">
+            <label for="setting-key">Key:</label> <input id="setting-key" type="text" width="30" placeholder=" "/>
+            <label for="setting-value">Value:</label> <input id="setting-value" type="text" width="30" placeholder=" "/>
+            <button type="submit">Filter</button>
+            <button type="button" id="clear">Clear</button>
+          </fieldset>
+        </form>
+      </div>
+    </header>
+    <main>
+      <div id="map">
+        <div class="message" id="busy-message">Loading...</div>
+        <div class="message" id="zoom-message">Zoom in for interactive map</div>
+        <div id="crosshair-container"><img id="crosshair" src="crosshair.svg" width="32"/></div>
+        <div id="location-control">
+          <div id="location-control-type" class="location-control-buttons">
+            <div data-type="bounds"><div class="hint-popup">Show map bounds</div>⛶</div>
+            <div data-type="center"><div class="hint-popup">Show map center</div>✛</div>
+            <div data-type="mouse" class="active"><div class="hint-popup">Show mouse position</div>↖</div>
+          </div>
+          <div id="location-control-copy-paste" class="location-control-buttons">
+              <div id="location-copy"><div class="hint-popup">Copy coordinates into clipboard</div>📋</div>
+          </div>
+          <div id="location"></div>
+          <div id="location-control-coordinates" class="location-control-buttons">
+            <div data-cs="lonlat" class="active"><div class="hint-popup">Show lon/lat coordinates</div>🌐</div>
+            <div data-cs="merc"><div class="hint-popup">Show mercator coordinates</div>𐌎</div>
+          </div>
+          <div class="location-control-buttons">
+            <div id="location-menu">≡
+              <div id="location-menu-popup">
+                <div><a id="location-menu-josm" href="" target="_blank">Open in JOSM</a></div>
+                <div><a id="location-menu-id" href="" target="_blank">Open in iD</a></div>
+                <div><a id="location-menu-osmorg" href="" target="_blank">Show on osm.org</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div class="overview"><span id="overview-count"></span> <span id="overview-message" class="overview-message"></span></div>
+    <div id="info" class="info"></div>
+    <footer>Map &amp; Data <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap Contributors</a> &middot; <a href="info/index.html" target="_blank">About/Help</a></footer>
+    <template id="template-object">
+      <div>
+        <h2><span class="num"></span> <span class="to-bounds">⛶</span> <span class="type"></span> <a target="_blank" href="https://www.openstreetmap.org/"></a></h2>
+        <table class="tags"><tbody></tbody></table>
+      </div>
+    </template>
+    <template id="template-tag">
+      <tr class="tag">
+        <td class="tag-key">
+          ≡&nbsp;<span></span>
+          <div class="kvmenu">
+            <div class="kvmenu-section">Filter:</div>
+            <div><a class="kvmenu-filter-key">Key</a></div>
+            <div><a class="kvmenu-filter-tag">Tag</a></div>
+            <div class="kvmenu-section">Taginfo:</div>
+            <div><a class="kvmenu-taginfo-key" target="_blank" href="https://taginfo.openstreetmap.org/keys/">Key</a></div>
+            <div><a class="kvmenu-taginfo-tag" target="_blank" href="https://taginfo.openstreetmap.org/tags/">Tag</a></div>
+            <div class="kvmenu-section">Wiki:</div>
+            <div><a class="kvmenu-wiki-key" target="_blank" href="https://wiki.openstreetmap.org/Key:">Key</a></div>
+            <div><a class="kvmenu-wiki-tag" target="_blank" href="https://wiki.openstreetmap.org/Tag:">Tag</a></div>
+            <div style="grid-column: 1 / span 3"><a class="kvmenu-web" target="_blank" href="">Open <span></span> link</a></div>
+          </div>
+        </td>
+        <td class="tag-value"><span></span></td>
+      </tr>
+    </template>
+  </body>
+</html>
