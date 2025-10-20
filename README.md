@@ -1,4 +1,6 @@
 
+This is an old version of what is now called OSM SPYGLASS and hosted on [Codeberg](https://codeberg.org/jot/osm-spyglass).
+
 # OSM X-RAY
 
 OpenStreetMap Debug View showing all tagged nodes, ways, and relations.
